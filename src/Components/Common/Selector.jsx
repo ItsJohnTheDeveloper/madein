@@ -19,7 +19,8 @@ function Selector({ onChange, title, isRegion }) {
       "home",
       "equipment",
       "appliances",
-      "automotive"
+      "automotive",
+      "food"
     ];
 
     return categories.map(category => {

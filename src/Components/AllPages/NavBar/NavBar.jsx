@@ -37,6 +37,45 @@ const useStyles = makeStyles(theme => ({
     alignSelf: "center",
     height: "fit-content",
     WebkitTapHighlightColor: "rgba(0,0,0,0)"
+  },
+  searchByRoot: {
+    height: 60,
+    display: "flex",
+    justifyContent: "center"
+  },
+  searchByBtn: {
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#FFFFFF",
+    color: "#606060",
+    display: "flex",
+    height: "100%",
+    width: "100%",
+    textDecoration: "none",
+    outline: "none !important",
+    cursor: "pointer",
+    WebkitTapHighlightColor: "rgba(0,0,0,0)",
+    "&:active": {
+      backgroundColor: "#FCFCFC"
+    }
+  },
+  title: {
+    fontSize: "1.000em",
+    fontFamily: "Helvetica Neue, Arial, sans-serif",
+    fontWeight: "500",
+    alignSelf: "center"
+  },
+  borderRight: {
+    borderRight: "1px solid #DEDEDE"
+  },
+  sticky: {
+    position: "fixed",
+    width: "100%",
+    width: "-moz-available" /* WebKit-based browsers will ignore this. */,
+    width:
+      "-webkit-fill-available" /* Mozilla-based browsers will ignore this. */,
+    width: "fill-available",
+    boxShadow: "0px 2px 10px #D3D3D3"
   }
 }));
 
@@ -60,9 +99,22 @@ function NavBar() {
   };
 
   return (
-    <div className={classes.navbarRoot}>
-      <LogoBtn />
-      <NavBarLeft />
+    <div className={classes.sticky}>
+      <div className={classes.navbarRoot}>
+        <LogoBtn />
+        <NavBarLeft />
+      </div>
+      <div className={classes.searchByRoot}>
+        <Link
+          to="/region"
+          className={classes.searchByBtn + " " + classes.borderRight}
+        >
+          <div className={classes.title}>By Region</div>
+        </Link>
+        <Link to="/category" className={classes.searchByBtn}>
+          <div className={classes.title}>By Category</div>
+        </Link>
+      </div>
     </div>
   );
 }

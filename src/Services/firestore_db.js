@@ -22,6 +22,7 @@ const db = firebase.firestore();
 const itemsRef = db.collection("items");
 
 //storage bucket
+const storage = firebase.storage();
 const storageRef = firebase.storage().ref();
 const imagesRef = storageRef.child("images/");
 
@@ -36,7 +37,8 @@ async function getAllItems() {
           text: item.data().text,
           manufacturer: item.data().manufacturer,
           category: item.data().category,
-          region: item.data().region
+          region: item.data().region,
+          url: item.data().url
         });
       });
     })
@@ -52,25 +54,36 @@ async function getAllItems() {
       item.text,
       item.manufacturer,
       item.region,
-      item.category
+      item.category,
+      item.url
     );
   });
 }
 
-async function addItem(itemObject, imageFile) {
+async function getImageByUrl(itemUrl) {
   try {
-    //Add the item inside firestore
-    const newItem = await itemsRef.add(Object.assign({}, itemObject));
+    const image = storage.refFromURL(itemUrl);
+    return image.getDownloadURL();
+  } catch (err) {
+    console.log(err);
+  }
+}
 
-    //Recieve the newly created item and insert the id into the image metadata
-    const metadata = {
-      customMetadata: {
-        itemId: newItem.id
-      },
-      contentType: "image/jpeg"
-    };
+async function addItem(itemObject, imageFile) {
+  const metadata = {
+    contentType: "image/jpeg"
+  };
 
-    await storageRef.child("images/" + imageFile.name).put(imageFile, metadata);
+  try {
+    const image = await storageRef
+      .child("images/" + imageFile.name)
+      .put(imageFile, metadata);
+
+    const downloadUrl = await image.ref.getDownloadURL();
+
+    itemObject.url = downloadUrl;
+
+    await itemsRef.add(Object.assign({}, itemObject));
 
     console.log("Item and Image successfully added into db");
   } catch (err) {
@@ -79,4 +92,8 @@ async function addItem(itemObject, imageFile) {
   }
 }
 
-export default { getAllItems: getAllItems, addItem: addItem };
+export default {
+  getAllItems: getAllItems,
+  addItem: addItem,
+  getImageByUrl: getImageByUrl
+};

@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Data from "../Services/firestore_db";
 import PageWrapper from "../Components/AllPages/Formatting/PageWrapper";
+import ItemDisplay from "../Components/Item/ItemDisplay";
 
 function Home() {
   const [items, setItems] = useState([]);
@@ -20,14 +21,8 @@ function Home() {
 
   return (
     <PageWrapper flex={true}>
-      {items.map((item, i) => (
-        <div>
-          {`Item # ${i}`}
-          <div>Text: {item.text}</div>
-          <div>Manugacturer: {item.manufacturer}</div>
-          <div>Region: {item.region}</div>
-          <div>Category: {item.category}</div>
-        </div>
+      {items.map(item => (
+        <ItemDisplay key={item.key} item={item} />
       ))}
       {console.log(items)}
     </PageWrapper>

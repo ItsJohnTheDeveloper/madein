@@ -1,10 +1,11 @@
 export class ItemDisplayInfo {
-  constructor(key, text, manufacturer, region, category) {
+  constructor(key, text, manufacturer, region, category, url) {
     this.key = key;
     this.text = text;
     this.manufacturer = manufacturer;
     this.region = region;
     this.category = category;
+    this.url = url;
   }
 }
 

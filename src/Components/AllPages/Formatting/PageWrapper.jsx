@@ -19,16 +19,17 @@ function PageWrapper({ flex, children }) {
         xs={12}
         sm={12}
         md={10}
-        lg={8}
-        xl={6}
+        lg={10}
+        xl={10}
         style={
           flex
             ? {
                 display: "flex",
                 justifyContent: "space-around",
-                flexFlow: "wrap"
+                flexFlow: "wrap",
+                marginTop: 106
               }
-            : {}
+            : { marginTop: 106 }
         }
       >
         {children}
