@@ -1,7 +1,7 @@
 import React from "react";
 import Grid from "@material-ui/core/grid";
 
-function PageWrapper({ flex, children }) {
+function PageWrapper({ flex, homepage, children }) {
   return (
     <Grid
       container
@@ -25,11 +25,11 @@ function PageWrapper({ flex, children }) {
           flex
             ? {
                 display: "flex",
-                justifyContent: "space-around",
+                justifyContent: homepage ? "space-between" : "space-around",
                 flexFlow: "wrap",
-                marginTop: 106
+                marginTop: 96
               }
-            : { marginTop: 106 }
+            : { marginTop: 96 }
         }
       >
         {children}
