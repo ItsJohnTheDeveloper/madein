@@ -2,32 +2,9 @@ import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core";
 import PaddingTop from "../Common/PaddingTop";
 import Data from "../../Services/firestore_db";
+import { Grid, Paper } from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
-  root: {
-    "@media only screen and (max-width: 539px)": {
-      minWidth: "100%",
-      maxWidth: 400,
-    },
-    "@media only screen and (min-width: 600px)": {
-      minWidth: "49%",
-      maxWidth: 282,
-    },
-    "@media only screen and (min-width: 960px)": {
-      minWidth: "33%",
-      maxWidth: 256,
-    },
-    display: "flex",
-
-    backgroundColor: "#FFFFFF",
-    marginTop: 8,
-    alignItems: "center",
-    flexFlow: "column",
-    boxShadow: "0px 2px 2px #CACACA",
-    "&:hover": {
-      boxShadow: "0px 4px 6px #CACACA",
-    },
-  },
   imgAndTextDiv: {
     display: "flex",
     padding: 10,
@@ -40,7 +17,6 @@ const useStyles = makeStyles((theme) => ({
   bottomBarText: {
     fontSize: "1.000em",
     fontFamily: "Helvetica Neue, Arial, sans-serif",
-    fontWeight: "bold",
     padding: "10px 14px 10px 14px",
   },
   img: {
@@ -86,19 +62,21 @@ function ItemDisplay({ item }) {
   };
 
   return (
-    <div className={classes.root}>
-      <div className={classes.imgAndTextDiv}>
-        {ImageDisplay()}
-        <div style={{ paddingLeft: 10 }}>
-          <div>{`${item.manufacturer} ${item.text}`}</div>
-          <PaddingTop paddingTop={4} />
-          <div style={{ color: "#747474" }}>{item.category}</div>
+    <Grid item xs={12} sm={6} md={6} lg={6} xl={4}>
+      <Paper>
+        <div className={classes.imgAndTextDiv}>
+          {ImageDisplay()}
+          <div style={{ paddingLeft: 10 }}>
+            <div>{`${item.manufacturer} ${item.text}`}</div>
+            <PaddingTop paddingTop={4} />
+            <div style={{ color: "#747474" }}>{item.category}</div>
+          </div>
         </div>
-      </div>
-      <div className={classes.bottomBar}>
-        <div className={classes.bottomBarText}>Made In {item.region}</div>
-      </div>
-    </div>
+        <div className={classes.bottomBar}>
+          <div className={classes.bottomBarText}>Made In {item.region}</div>
+        </div>
+      </Paper>
+    </Grid>
   );
 }
 export default ItemDisplay;

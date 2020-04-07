@@ -2,42 +2,32 @@ import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core";
 import PaddingTop from "../Common/PaddingTop";
 import history from "../../Router/history";
+import { Grid, Paper } from "@material-ui/core";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
-    "@media only screen and (max-width: 539px)": {
-      minWidth: "100%"
-    },
-    "@media only screen and (min-width: 540px)": {
-      minWidth: "45%"
-    },
-    "@media only screen and (min-width: 960px)": {
-      minWidth: "30%"
-    },
     display: "flex",
-    maxWidth: 300,
     paddingLeft: 10,
     paddingRight: 10,
     backgroundColor: "#FFFFFF",
-    marginTop: 14,
     alignItems: "center",
     flexFlow: "column",
     boxShadow: "0px 2px 2px #CACACA",
     cursor: "pointer",
     "&:active": {
       outline: "none !important",
-      opacity: 0.8
+      opacity: 0.8,
     },
     "&:hover": {
-      boxShadow: "0px 4px 6px #CACACA"
-    }
+      boxShadow: "0px 4px 6px #CACACA",
+      opacity: 0.9,
+    },
   },
   text: {
     fontSize: "1.000em",
     fontFamily: "Helvetica Neue, Arial, sans-serif",
-    fontWeight: "bold",
     color: "#363636",
-    maxWidth: 270
+    maxWidth: 270,
   },
   img: {
     width: 150,
@@ -45,8 +35,8 @@ const useStyles = makeStyles(theme => ({
     "-khtml-user-drag": "none",
     "-moz-user-drag": "none",
     "-o-user-drag": "none",
-    "user-drag": "none"
-  }
+    "user-drag": "none",
+  },
 }));
 
 function RegionDisplay({ region, photo }) {
@@ -63,15 +53,17 @@ function RegionDisplay({ region, photo }) {
   const redirectToRegion = () => history.push(`/region:${region}`);
 
   return (
-    <div
-      className={classes.root}
-      key={region}
-      onClick={() => redirectToRegion()}
-    >
-      <PaddingTop paddingTop={10} />
-      <div className={classes.text}>Made In {region}</div>
-      {getFlags()}
-    </div>
+    <Grid item xs={12} sm={6} md={6} lg={4} xl={4}>
+      <Paper
+        className={classes.root}
+        key={region}
+        onClick={() => redirectToRegion()}
+      >
+        <PaddingTop paddingTop={10} />
+        <div className={classes.text}>Made In {region}</div>
+        {getFlags()}
+      </Paper>
+    </Grid>
   );
 }
 export default RegionDisplay;

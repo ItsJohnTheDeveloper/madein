@@ -11,6 +11,7 @@ const useStyles = makeStyles((theme) => ({
       width: "-moz-available" /* For Mozzila */,
     },
     marginTop: 8,
+    marginBottom: 8,
   },
   inputBarDiv: {
     height: 38,

@@ -27,7 +27,7 @@ function Items() {
   }
 
   return (
-    <PageWrapper flex={true}>
+    <PageWrapper>
       <LoadingIcon isLoading={isLoading} />
       {!isLoading && items ? (
         <ItemList itemList={items} region={region} />

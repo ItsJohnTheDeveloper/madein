@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Data from "../Services/firestore_db";
 import PageWrapper from "../Components/AllPages/Formatting/PageWrapper";
-import ItemDisplay from "../Components/Item/ItemDisplay";
+import ItemList from "../Components/Item/ItemList";
 import SearchBar from "../Components/Common/SearchBar";
 
 function Home() {
@@ -35,11 +35,9 @@ function Home() {
   };
 
   return (
-    <PageWrapper flex={true} homepage={true}>
+    <PageWrapper>
       <SearchBar searchText={(text) => setSearchText(text.toLowerCase())} />
-      {filterItems(items).map((item) => (
-        <ItemDisplay key={item.key} item={item} />
-      ))}
+      <ItemList itemList={filterItems(items)} />
     </PageWrapper>
   );
 }
