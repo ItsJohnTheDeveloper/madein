@@ -1,16 +1,10 @@
 import React from "react";
-import { CircularProgress } from "@material-ui/core";
+import { LinearProgress } from "@material-ui/core";
 
-function LoadingIcon({ isLoading, marginTop, marginBottom }) {
+function LoadingIcon({ isLoading }) {
   return isLoading ? (
-    <div
-      style={{
-        textAlign: "center",
-        marginTop: { marginTop },
-        marginBottom: { marginBottom }
-      }}
-    >
-      <CircularProgress style={{ color: "#363636" }} />
+    <div style={{ width: "100%" }}>
+      <LinearProgress color={"secondary"} />
     </div>
   ) : null;
 }

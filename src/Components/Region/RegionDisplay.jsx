@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core";
 import PaddingTop from "../Common/PaddingTop";
+import history from "../../Router/history";
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -59,8 +60,14 @@ function RegionDisplay({ region, photo }) {
     return <img src={img} className={classes.img} />;
   }
 
+  const redirectToRegion = () => history.push(`/region:${region}`);
+
   return (
-    <div className={classes.root} key={region}>
+    <div
+      className={classes.root}
+      key={region}
+      onClick={() => redirectToRegion()}
+    >
       <PaddingTop paddingTop={10} />
       <div className={classes.text}>Made In {region}</div>
       {getFlags()}

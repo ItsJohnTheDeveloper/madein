@@ -2,62 +2,67 @@ import React, { useState, useEffect } from "react";
 import { makeStyles } from "@material-ui/core";
 import PaddingTop from "../Common/PaddingTop";
 import Data from "../../Services/firestore_db";
-import LoadingIcon from "../Common/LoadingIcon";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     "@media only screen and (max-width: 539px)": {
       minWidth: "100%",
-      maxWidth: 400
+      maxWidth: 400,
     },
     "@media only screen and (min-width: 600px)": {
       minWidth: "49%",
-      maxWidth: 282
+      maxWidth: 282,
     },
     "@media only screen and (min-width: 960px)": {
       minWidth: "33%",
-      maxWidth: 256
+      maxWidth: 256,
     },
     display: "flex",
 
     backgroundColor: "#FFFFFF",
-    marginTop: 14,
+    marginTop: 8,
     alignItems: "center",
     flexFlow: "column",
     boxShadow: "0px 2px 2px #CACACA",
     "&:hover": {
-      boxShadow: "0px 4px 6px #CACACA"
-    }
+      boxShadow: "0px 4px 6px #CACACA",
+    },
   },
   imgAndTextDiv: {
     display: "flex",
-    padding: 10
+    padding: 10,
   },
   bottomBar: {
     display: "flex",
     backgroundColor: "#F2F2F2",
-    width: "100%"
+    width: "100%",
   },
   bottomBarText: {
     fontSize: "1.000em",
     fontFamily: "Helvetica Neue, Arial, sans-serif",
     fontWeight: "bold",
-    padding: "10px 14px 10px 14px"
+    padding: "10px 14px 10px 14px",
   },
   img: {
-    maxWidth: "25%",
     "-webkit-user-drag": "none",
     "-khtml-user-drag": "none",
     "-moz-user-drag": "none",
     "-o-user-drag": "none",
-    "user-drag": "none"
-  }
+    "user-drag": "none",
+
+    display: "block",
+    maxHeight: 100,
+    minHeight: 100,
+    minWidth: "25%",
+    width: "25%",
+    height: "auto",
+    objectFit: "cover",
+  },
 }));
 
 function ItemDisplay({ item }) {
   const classes = useStyles();
   const [imageUrl, setImageUrl] = useState("");
-  const [loadingImage, setLoadingImage] = useState(false);
 
   useEffect(() => {
     getItemImage();
@@ -65,20 +70,15 @@ function ItemDisplay({ item }) {
 
   async function getItemImage() {
     try {
-      setLoadingImage(true);
       const url = await Data.getImageByUrl(item.url);
       setImageUrl(url);
-      setLoadingImage(false);
     } catch (err) {
-      setLoadingImage(false);
       console.log(`An error occured grabbing image ${err}`);
     }
   }
 
   const ImageDisplay = () => {
-    return loadingImage ? (
-      <LoadingIcon isLoading={loadingImage} marginBottom={40} marginTop={40} />
-    ) : imageUrl ? (
+    return imageUrl ? (
       <img src={imageUrl} className={classes.img} />
     ) : (
       <div className={classes.img}>No image preview</div>

@@ -4,7 +4,7 @@ import { Home } from "@material-ui/icons";
 import { Link } from "react-router-dom";
 import Logo from "../../../Resources/madeinlogo.png";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   navbarRoot: {
     backgroundColor: "#ffffff",
     height: 45,
@@ -12,11 +12,11 @@ const useStyles = makeStyles(theme => ({
     paddingRight: 14,
     borderBottom: "1px solid #DEDEDE",
     display: "flex",
-    justifyContent: "space-between"
+    //justifyContent: "space-between"
   },
   icon: {
     color: "#606060",
-    fontSize: "xx-large"
+    fontSize: "xx-large",
   },
 
   link: {
@@ -27,8 +27,8 @@ const useStyles = makeStyles(theme => ({
     height: "fit-content",
     alignSelf: "center",
     "&:active": {
-      opacity: 0.7
-    }
+      opacity: 0.7,
+    },
   },
   logoLink: {
     display: "flex",
@@ -36,12 +36,12 @@ const useStyles = makeStyles(theme => ({
     outline: "none !important",
     alignSelf: "center",
     height: "fit-content",
-    WebkitTapHighlightColor: "rgba(0,0,0,0)"
+    WebkitTapHighlightColor: "rgba(0,0,0,0)",
   },
   searchByRoot: {
-    height: 60,
+    height: 50,
     display: "flex",
-    justifyContent: "center"
+    justifyContent: "center",
   },
   searchByBtn: {
     justifyContent: "center",
@@ -56,17 +56,33 @@ const useStyles = makeStyles(theme => ({
     cursor: "pointer",
     WebkitTapHighlightColor: "rgba(0,0,0,0)",
     "&:active": {
-      backgroundColor: "#FCFCFC"
-    }
+      backgroundColor: "#FCFCFC",
+    },
+  },
+  homeIcon: {
+    justifyContent: "center",
+    alignItems: "center",
+    backgroundColor: "#FFFFFF",
+    color: "#606060",
+    display: "flex",
+    height: "100%",
+    width: 75,
+    textDecoration: "none",
+    outline: "none !important",
+    cursor: "pointer",
+    WebkitTapHighlightColor: "rgba(0,0,0,0)",
+    borderRight: "1px solid #DEDEDE",
+    borderLeft: "1px solid #DEDEDE",
+    padding: "0px 12px",
+    "&:active": {
+      backgroundColor: "#FCFCFC",
+    },
   },
   title: {
     fontSize: "1.000em",
     fontFamily: "Helvetica Neue, Arial, sans-serif",
     fontWeight: "500",
-    alignSelf: "center"
-  },
-  borderRight: {
-    borderRight: "1px solid #DEDEDE"
+    alignSelf: "center",
   },
   sticky: {
     position: "fixed",
@@ -75,43 +91,55 @@ const useStyles = makeStyles(theme => ({
     width:
       "-webkit-fill-available" /* Mozilla-based browsers will ignore this. */,
     width: "fill-available",
-    boxShadow: "0px 2px 10px #D3D3D3"
-  }
+    boxShadow: "0px 2px 10px #D3D3D3",
+    zIndex: 999,
+  },
 }));
 
 function NavBar() {
   const classes = useStyles();
 
-  const NavBarLeft = () => {
+  const LogoBtn = () => {
     return (
-      <Link className={classes.link} to="/">
-        <Home className={classes.icon} />
+      <Link
+        className={classes.logoLink}
+        to="/"
+        onDragStart={preventDragHandler}
+      >
+        <img src={Logo} style={{ height: 35 }} />
       </Link>
     );
   };
 
-  const LogoBtn = () => {
-    return (
-      <Link className={classes.logoLink} to="/">
-        <img src={Logo} style={{ height: 35 }} />
-      </Link>
-    );
+  const preventDragHandler = (e) => {
+    e.preventDefault();
   };
 
   return (
     <div className={classes.sticky}>
       <div className={classes.navbarRoot}>
         <LogoBtn />
-        <NavBarLeft />
       </div>
       <div className={classes.searchByRoot}>
         <Link
           to="/region"
-          className={classes.searchByBtn + " " + classes.borderRight}
+          className={classes.searchByBtn}
+          onDragStart={preventDragHandler}
         >
           <div className={classes.title}>By Region</div>
         </Link>
-        <Link to="/category" className={classes.searchByBtn}>
+        <Link
+          className={classes.homeIcon}
+          to="/"
+          onDragStart={preventDragHandler}
+        >
+          <Home className={classes.icon} />
+        </Link>
+        <Link
+          to="/category"
+          className={classes.searchByBtn}
+          onDragStart={preventDragHandler}
+        >
           <div className={classes.title}>By Category</div>
         </Link>
       </div>
