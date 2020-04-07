@@ -12,7 +12,7 @@ function CreateItem({ handleSubmit }) {
   const [manufacturer, setManufacturer] = useState("");
   const [imageFile, setImageFile] = useState({});
 
-  const handleChange = e => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
     switch (name) {
       case "text":
@@ -33,6 +33,7 @@ function CreateItem({ handleSubmit }) {
   function changeRegion(e) {
     setRegion(e.value);
   }
+
   function changeCategory(e) {
     setCategory(e.value);
   }
@@ -60,7 +61,7 @@ function CreateItem({ handleSubmit }) {
       <PaddingTop paddingTop={14} />
       <Selector onChange={changeCategory} title={"Select Category"} />
       <PaddingTop paddingTop={30} />
-      <UploadFileButton updateFile={e => setImageFile(e.target.files[0])} />
+      <UploadFileButton updateFile={(e) => setImageFile(e.target.files[0])} />
       <PaddingTop paddingTop={50} />
       <ClickButtom text={"Create"} width={165} onClick={handleCreateItem} />
     </div>

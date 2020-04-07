@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Data from "../Services/firestore_db";
 import PageWrapper from "../Components/AllPages/Formatting/PageWrapper";
-import ItemDisplay from "../Components/Item/ItemDisplay";
+import ItemList from "../Components/Item/ItemList";
 import SearchBar from "../Components/Common/SearchBar";
 
 function Home() {
@@ -22,23 +22,22 @@ function Home() {
     }
   }
 
-  const filterItems = items => {
+  const filterItems = (items) => {
     if (searchText === "") return items;
     else
-      return items.filter(item => {
+      return items.filter((item) => {
         return (
           item.text.toLowerCase().includes(searchText) ||
-          item.manufacturer.toLowerCase().includes(searchText)
+          item.manufacturer.toLowerCase().includes(searchText) ||
+          item.category.toLowerCase().includes(searchText)
         );
       });
   };
 
   return (
-    <PageWrapper flex={true} homepage={true}>
-      <SearchBar searchText={text => setSearchText(text.toLowerCase())} />
-      {filterItems(items).map(item => (
-        <ItemDisplay key={item.key} item={item} />
-      ))}
+    <PageWrapper>
+      <SearchBar searchText={(text) => setSearchText(text.toLowerCase())} />
+      <ItemList itemList={filterItems(items)} />
     </PageWrapper>
   );
 }

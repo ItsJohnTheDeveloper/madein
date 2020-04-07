@@ -2,24 +2,25 @@ import React, { useState } from "react";
 import { makeStyles } from "@material-ui/core";
 import { Search } from "@material-ui/icons/";
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   root: {
     display: "flex",
     position: "relative",
     width: "100%",
     "@supports not( width: 100% )": {
-      width: "-moz-available" /* For Mozzila */
+      width: "-moz-available" /* For Mozzila */,
     },
-    marginTop: 8
+    marginTop: 8,
+    marginBottom: 8,
   },
   inputBarDiv: {
     height: 38,
     backgroundColor: "#FFFFFF",
     width: "100%",
     "@supports not( width: 100% )": {
-      width: "-moz-available" /* For Mozzila */
+      width: "-moz-available" /* For Mozzila */,
     },
-    border: "none !important"
+    border: "none !important",
   },
   inputBar: {
     backgroundColor: "#FFFFFF",
@@ -35,12 +36,12 @@ const useStyles = makeStyles(theme => ({
     "&:focus": {
       outline: "none !important",
       "&::placeholder": {
-        opacity: 0.7
-      }
+        opacity: 0.7,
+      },
     },
     "&::placeholder": {
-      color: "#808080"
-    }
+      color: "#808080",
+    },
   },
   SearchBtn: {
     justifyContent: "center",
@@ -53,28 +54,23 @@ const useStyles = makeStyles(theme => ({
     cursor: "pointer",
     WebkitTapHighlightColor: "rgba(0,0,0,0)",
     "&:active": {
-      opacity: 0.7
-    }
+      opacity: 0.7,
+    },
   },
   SearchIcon: {
     color: "#FFFFFF",
-    alignSelf: "center"
-  }
+    alignSelf: "center",
+  },
 }));
 
 function SearchBar({ searchText }) {
   const classes = useStyles();
-  //const [text, setText] = useState("");
 
-  const onSubmit = event => {
+  const onSubmit = (event) => {
     event.preventDefault();
-    //onSearch(text);
   };
 
-  const onChange = event => {
-    // if (event.target.value === "") isEmpty(true);
-    // else isEmpty(false);
-    // setText(event.target.value);
+  const onChange = (event) => {
     searchText(event.target.value);
   };
 
@@ -82,7 +78,6 @@ function SearchBar({ searchText }) {
     <form className={classes.root} onSubmit={onSubmit}>
       <div className={classes.inputBarDiv}>
         <input
-          //value={text}
           onChange={onChange}
           className={classes.inputBar}
           placeholder="Search"
