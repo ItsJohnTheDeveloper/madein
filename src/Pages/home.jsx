@@ -22,21 +22,22 @@ function Home() {
     }
   }
 
-  const filterItems = items => {
+  const filterItems = (items) => {
     if (searchText === "") return items;
     else
-      return items.filter(item => {
+      return items.filter((item) => {
         return (
           item.text.toLowerCase().includes(searchText) ||
-          item.manufacturer.toLowerCase().includes(searchText)
+          item.manufacturer.toLowerCase().includes(searchText) ||
+          item.category.toLowerCase().includes(searchText)
         );
       });
   };
 
   return (
     <PageWrapper flex={true} homepage={true}>
-      <SearchBar searchText={text => setSearchText(text.toLowerCase())} />
-      {filterItems(items).map(item => (
+      <SearchBar searchText={(text) => setSearchText(text.toLowerCase())} />
+      {filterItems(items).map((item) => (
         <ItemDisplay key={item.key} item={item} />
       ))}
     </PageWrapper>
